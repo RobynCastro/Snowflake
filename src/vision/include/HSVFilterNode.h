@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef GREEN_FILTER_H
-#define GREEN_FILTER_H
+#ifndef HSV_FILTER_H
+#define HSV_FILTER_H
 
 // OpenCV
 #include <opencv2/core/core.hpp>

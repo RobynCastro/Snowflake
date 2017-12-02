@@ -5,11 +5,15 @@ project(vision)
 find_package(catkin REQUIRED COMPONENTS roscpp rospy cv_bridge image_transport )
 find_package(OpenCV REQUIRED)
 find_package(sb_utils REQUIRED)
+find_package(PCL 1.7 REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 add_definitions(-std=c++14)
 
 catkin_package(
-    #  INCLUDE_DIRS include
+        INCLUDE_DIRS include
+        DEPENDS
+        EIGEN3
 )
 
 
@@ -21,10 +25,13 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
-    ${catkin_INCLUDE_DIRS}
-    ${OpenCV_INCLUDE_DIRS}
-    ${sb_utils_INCLUDE_DIRS}
-    ./include
+        ${catkin_INCLUDE_DIRS}
+        ${OpenCV_INCLUDE_DIRS}
+        ${sb_utils_INCLUDE_DIRS}
+        ${PCL_INCLUDE_DIRS}
+        ${EIGEN3_INCLUDE_DIRS}
+        ${EIGEN3_LIBRARIES}
+        ./include
 )
 
 ## Declare a C++ executable
@@ -47,6 +54,16 @@ add_executable(ipm_filter
         include/IPM.h
         )
 
+add_executable(pcl_transform
+        src/PCLTransform.cpp
+        src/pcl_transform.cpp
+        src/PCLTransformNode.cpp
+        include/PCLTransform.h
+        include/PCLTransformNode.h)
+
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
 add_executable(camera src/camera_init.cpp)
 
 ## Specify libraries to link a library or executable target against
@@ -62,6 +79,12 @@ target_link_libraries(hsv_filter
 target_link_libraries(ipm_filter
         ${catkin_LIBRARIES}
         ${OpenCV_LIBS}
+        ${sb_utils_LIBRARIES}
+        )
+
+target_link_libraries(pcl_transform
+        ${catkin_LIBRARIES}
+        ${PCL_LIBRARIES}
         ${sb_utils_LIBRARIES}
         )
 
