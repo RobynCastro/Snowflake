@@ -28,14 +28,9 @@ HoleTrackerDecision::HoleTrackerDecision() {
     origin.y = 0;
 }
 
-geometry_msgs::Twist HoleTrackerDecision::determineDesiredMotion(vector<vector<geometry_msgs::Point>> merged_points,
-                                                                 geometry_msgs::Point hole) {
+geometry_msgs::Twist HoleTrackerDecision::determineDesiredMotion(geometry_msgs::Point hole) {
     geometry_msgs::Twist move_to_hole;
-    geometry_msgs::Twist avoid_cones;
-    initTwist(avoid_cones);
     initTwist(move_to_hole);
-
-    // TODO: If merged points are too close move away from them
 
     double theta = LinearAlgebra().getAngleToPoint(hole);
     double distance = LinearAlgebra().distanceBetweenPoints(hole, origin);

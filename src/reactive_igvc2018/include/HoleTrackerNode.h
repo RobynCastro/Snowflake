@@ -10,12 +10,22 @@
 #include <geometry_msgs/Twist.h>
 #include <visualization_msgs/Marker.h>
 
+// Obstacle
+#include <ObstacleManager.h>
+
+// Motion
+#include <HoleTrackerDecision.h>
+
 // ROS
 #include <ros/ros.h>
 
 // Utilities
 #include <sb_utils.h>
-#include <RvizUtils.h>
+
+// Avoiders
+#include "ConeAvoider.h"
+#include "LineAvoider.h"
+#include "ConeLineAvoider.h"
 
 using namespace std;
 class HoleTrackerNode {
@@ -29,7 +39,7 @@ private:
      *
      *  @param cones the array of cones received in the callback
      */
-    void coneMessageCallBack(const sensor_msgs::LaserScan laser_scan);
+    void coneMessageCallBack(/*TODO*/);
 
     /**
      *  Callback function for when a new polynomial representing line
@@ -38,6 +48,11 @@ private:
      *  @param line the line boundary received in the callback
      */
     void lineMessageCallBack(/*TODO:*/);
+
+    /**
+     *
+     */
+    void updateTargetDestination(std::vector<int> new_cones, int new_line, bool updateCones, bool updateLines);
 
     /**
      *  Publishes the twist.
@@ -83,10 +98,14 @@ private:
     double max_distance_from_goal;
 
     // Obstacle Manager parameters
-    double cone_grouping_tolerance;
-    double max_scan_distance;
+    /*TODO: */
 
-    // Lidar Subscriber
+    // Obstacles
+    /*TODO: Get object type*/
+    std::vector<int> cones;
+    int line;
+
+    // Obstacle Subscribers
     ros::Subscriber cone_message_subscriber;
     ros::Subscriber line_message_subscriber;
 
@@ -98,7 +117,15 @@ private:
 
     // Controller
     HoleTrackerDecision hole_tracker_decision;
-    LidarObstacleManager obstacle_manager;
+
+    // Avoiders
+
+    ConeAvoider cone_avoider;
+    LineAvoider line_avoider;
+    ConeLineAvoider cone_line_avoider;
+
+    // Obstacle Manager
+    ObstacleManager obstacle_manager;
 
 };
 

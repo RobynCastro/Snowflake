@@ -9,9 +9,6 @@
 #include <geometry_msgs/Twist.h>
 #include <geometry_msgs/Point.h>
 
-// Obstacle Manager
-#include <LidarObstacleManager.h>
-
 // Utilities
 #include <LinearAlgebra.h>
 
@@ -33,8 +30,7 @@ public:
      *
      *  @return the twist motion
      */
-    geometry_msgs::Twist determineDesiredMotion(vector<vector<geometry_msgs::Point>> merged_points,
-                                                geometry_msgs::Point hole);
+    geometry_msgs::Twist determineDesiredMotion(geometry_msgs::Point hole);
 
     /**
      *  Determines the turning velocity

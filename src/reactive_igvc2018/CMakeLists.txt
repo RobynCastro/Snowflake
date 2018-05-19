@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(decision_igvc2018)
+project(reactive_igvc2018)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -39,13 +39,27 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# TODO: add_executable(${PROJECT_NAME}_node src/decision_igvc2018_node.cpp)
+add_executable(hole_tracker_node
+        src/hole_tracker_node.cpp
+        src/HoleTrackerNode.cpp
+        src/HoleTrackerDecision.cpp
+        src/ObstacleManager.cpp
+        src/LinearAlgebra.cpp
+        src/LineAvoider.cpp
+        src/ConeAvoider.cpp
+        src/ConeLineAvoider.cpp
+        include/HoleTrackerNode.h
+        include/HoleTrackerDecision.h
+        include/ObstacleManager.h
+        include/LinearAlgebra.h
+        include/LineAvoider.h
+        include/ConeAvoider.h
+        include/ConeLineAvoider.h)
 
 ## Specify libraries to link a library or executable target against
-# TODO:
-#  target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(hole_tracker_node
+        ${catkin_LIBRARIES}
+        ${sb_utils_LIBRARIES})
 
 #############
 ## Testing ##
