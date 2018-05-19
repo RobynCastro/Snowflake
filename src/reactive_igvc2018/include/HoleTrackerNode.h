@@ -21,6 +21,8 @@
 
 // Utilities
 #include <sb_utils.h>
+#include "mapping_igvc/LineObstacle.h"
+#include "mapping_igvc/ConeObstacle.h"
 
 // Avoiders
 #include "ConeAvoider.h"
@@ -39,7 +41,7 @@ private:
      *
      *  @param cones the array of cones received in the callback
      */
-    void coneMessageCallBack(/*TODO*/);
+    void coneMessageCallBack(mapping_igvc::ConeObstacle coneObstacle);
 
     /**
      *  Callback function for when a new polynomial representing line
@@ -47,12 +49,12 @@ private:
      *
      *  @param line the line boundary received in the callback
      */
-    void lineMessageCallBack(/*TODO:*/);
+    void lineMessageCallBack(mapping_igvc::LineObstacle lineObstacle);
 
     /**
      *
      */
-    void updateTargetDestination(std::vector<int> new_cones, int new_line, bool updateCones, bool updateLines);
+    void updateTargetDestination(std::vector<mapping_igvc::ConeObstacle> new_cones, mapping_igvc::LineObstacle new_line, bool updateCones, bool updateLines);
 
     /**
      *  Publishes the twist.
@@ -101,9 +103,8 @@ private:
     /*TODO: */
 
     // Obstacles
-    /*TODO: Get object type*/
-    std::vector<int> cones;
-    int line;
+    std::vector<mapping_igvc::ConeObstacle> cones;
+    mapping_igvc::LineObstacle line;
 
     // Obstacle Subscribers
     ros::Subscriber cone_message_subscriber;

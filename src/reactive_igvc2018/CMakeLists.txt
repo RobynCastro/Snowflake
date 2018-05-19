@@ -9,7 +9,8 @@ project(reactive_igvc2018)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
         roscpp
-        rospy)
+        rospy
+        mapping_igvc)
 
 ## System dependencies are found with CMake's conventions
 find_package(sb_utils REQUIRED)
