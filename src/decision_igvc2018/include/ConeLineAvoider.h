@@ -1,0 +1,8 @@
+//
+// Created by robyn on 19/05/18.
+//
+
+#ifndef PROJECT_CONELINEAVOIDER_H
+#define PROJECT_CONELINEAVOIDER_H
+
+#endif //PROJECT_CONELINEAVOIDER_H
