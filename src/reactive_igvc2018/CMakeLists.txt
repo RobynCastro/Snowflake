@@ -44,14 +44,12 @@ add_executable(hole_tracker_node
         src/hole_tracker_node.cpp
         src/HoleTrackerNode.cpp
         src/HoleTrackerDecision.cpp
-        src/ObstacleManager.cpp
         src/LinearAlgebra.cpp
         src/LineAvoider.cpp
         src/ConeAvoider.cpp
         src/ConeLineAvoider.cpp
         include/HoleTrackerNode.h
         include/HoleTrackerDecision.h
-        include/ObstacleManager.h
         include/LinearAlgebra.h
         include/LineAvoider.h
         include/ConeAvoider.h

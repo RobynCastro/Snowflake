@@ -6,6 +6,8 @@
 #define PROJECT_CONELINEAVOIDER_H
 
 #include <geometry_msgs/Point.h>
+#include "mapping_igvc/ConeObstacle.h"
+#include "mapping_igvc/LineObstacle.h"
 
 class ConeLineAvoider{
 public:
@@ -14,7 +16,8 @@ public:
     // Required empty constructor
     ConeLineAvoider();
 
-    geometry_msgs::Point getTargetDestination(std::vector<int> cones, int line);
+    geometry_msgs::Point getTargetDestination(std::vector<mapping_igvc::ConeObstacle> cones,
+                                              mapping_igvc::LineObstacle line);
 private:
 
 

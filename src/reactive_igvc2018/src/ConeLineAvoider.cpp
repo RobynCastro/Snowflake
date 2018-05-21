@@ -6,4 +6,8 @@
 ConeLineAvoider::ConeLineAvoider(int todo) {}
 ConeLineAvoider::ConeLineAvoider() {}
 
-geometry_msgs::Point ConeLineAvoider::getTargetDestination(std::vector<int> cones, int line) {}
+using namespace std;
+using namespace mapping_igvc;
+
+geometry_msgs::Point ConeLineAvoider::getTargetDestination(std::vector<mapping_igvc::ConeObstacle> cones,
+                                                           mapping_igvc::LineObstacle line) {}

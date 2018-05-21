@@ -6,9 +6,10 @@
  */
 #include <HoleTrackerNode.h>
 
+using namespace std;
 using namespace mapping_igvc;
 
-HoleTrackerNode::HoleTrackerNode(int argc, char **argv, std::string node_name) {
+HoleTrackerNode::HoleTrackerNode(int argc, char **argv, string node_name) {
 
     // Setup NodeHandles
     ros::init(argc, argv, node_name);
@@ -16,7 +17,7 @@ HoleTrackerNode::HoleTrackerNode(int argc, char **argv, std::string node_name) {
     ros::NodeHandle private_nh("~");
 
     initDecisionParams(private_nh);
-    initObstacleManagerParams(private_nh);
+    
     initSubscribers(nh);
     initPublishers(nh);
 
@@ -27,7 +28,7 @@ HoleTrackerNode::HoleTrackerNode(int argc, char **argv, std::string node_name) {
 }
 
 void HoleTrackerNode::coneMessageCallBack(ConeObstacle coneObstacle) {
-    std::vector<mapping_igvc::ConeObstacle_> cones;
+    vector<ConeObstacle> cones;
     cones.push_back(coneObstacle);
     updateTargetDestination(cones, line, true, false);
 }
@@ -36,7 +37,7 @@ void HoleTrackerNode::lineMessageCallBack(LineObstacle lineObstacle) {
     updateTargetDestination(cones, lineObstacle, false, true);
 }
 
-void HoleTrackerNode::updateTargetDestination(std::vector<mapping_igvc::ConeObstacle> new_cones, mapping_igvc::LineObstacle new_line, bool updateCones, bool updateLines) {
+void HoleTrackerNode::updateTargetDestination(vector<ConeObstacle> new_cones, LineObstacle new_line, bool updateCones, bool updateLines) {
     geometry_msgs::Point destination;
 
     // Update any obstacles
@@ -77,22 +78,19 @@ void HoleTrackerNode::initDecisionParams(ros::NodeHandle private_nh) {
     SB_getParam(private_nh, "max_distance_from_goal", max_distance_from_goal, 1.0);
 }
 
-void HoleTrackerNode::initObstacleManagerParams(ros::NodeHandle private_nh) {
-}
-
 void HoleTrackerNode::initSubscribers(ros::NodeHandle nh) {
-    std::string topic_to_subscribe_to = "/output_cone_obstacle";
+    string topic_to_subscribe_to = "/output_cone_obstacle";
     uint32_t refresh_rate = 10;
     cone_message_subscriber = nh.subscribe(topic_to_subscribe_to, refresh_rate, &HoleTrackerNode::coneMessageCallBack,
                                          this);
 
-    std::string line_extractor_topic = "/output_line_obstacle";
+    string line_extractor_topic = "/output_line_obstacle";
     line_message_subscriber = nh.subscribe(line_extractor_topic, refresh_rate, &HoleTrackerNode::lineMessageCallBack,
                                             this);
 }
 
 void HoleTrackerNode::initPublishers(ros::NodeHandle private_nh) {
     uint32_t queue_size = 1;
-    std::string topic = private_nh.resolveName("cmd_vel");
+    string topic = private_nh.resolveName("cmd_vel");
     twist_publisher = private_nh.advertise<geometry_msgs::Twist>(topic, queue_size);
 }

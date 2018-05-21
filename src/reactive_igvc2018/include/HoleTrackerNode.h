@@ -10,9 +10,6 @@
 #include <geometry_msgs/Twist.h>
 #include <visualization_msgs/Marker.h>
 
-// Obstacle
-#include <ObstacleManager.h>
-
 // Motion
 #include <HoleTrackerDecision.h>
 
@@ -124,9 +121,6 @@ private:
     ConeAvoider cone_avoider;
     LineAvoider line_avoider;
     ConeLineAvoider cone_line_avoider;
-
-    // Obstacle Manager
-    ObstacleManager obstacle_manager;
 
 };
 

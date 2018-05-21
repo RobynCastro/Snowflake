@@ -8,17 +8,23 @@
 
 #include <geometry_msgs/Point.h>
 
+#include "mapping_igvc/LineObstacle.h"
+
 class LineAvoider{
 public:
-    LineAvoider(int todo/*TODO: Determine parameters*/);
+    LineAvoider(double distance_away_from_robot, double distance_away_from_line);
 
     // Required empty constructor
     LineAvoider();
 
-    geometry_msgs::Point getTargetDestination(int line);
+    geometry_msgs::Point getTargetDestination(mapping_igvc::LineObstacle line);
 private:
 
+    mapping_igvc::LineObstacle reduceToFirstDegreePolynomial(mapping_igvc::LineObstacle line);
+    geometry_msgs::Point getPerpendicularIntersection(mapping_igvc::LineObstacle line);
 
+    double distance_away_from_robot;
+    double distance_away_from_line;
 
 };
 

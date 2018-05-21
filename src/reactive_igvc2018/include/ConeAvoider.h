@@ -6,18 +6,25 @@
 #define PROJECT_CONEAVOIDER_H
 
 #include <geometry_msgs/Point.h>
+#include "mapping_igvc/ConeObstacle.h"
+
+#include "LinearAlgebra.h"
 
 class ConeAvoider{
 public:
-    ConeAvoider(int todo/*TODO: Determine parameters*/);
+    ConeAvoider(float robot_width);
 
     // Required empty constructor
     ConeAvoider();
 
-    geometry_msgs::Point getTargetDestination(std::vector<int> cones);
+    geometry_msgs::Point getTargetDestination(std::vector<mapping_igvc::ConeObstacle> cones);
 private:
 
+    std::vector<std::vector<mapping_igvc::ConeObstacle> > mergeCones(std::vector<mapping_igvc::ConeObstacle> cones);
 
+    bool findMatch(std::vector<std::vector<mapping_igvc::ConeObstacle> > &merged_cones,
+                   mapping_igvc::ConeObstacle cone);
 
+    float robot_width;
 };
 #endif //PROJECT_CONEAVOIDER_H
