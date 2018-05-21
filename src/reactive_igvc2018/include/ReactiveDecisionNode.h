@@ -9,6 +9,8 @@
 #include <sensor_msgs/LaserScan.h>
 #include <geometry_msgs/Twist.h>
 #include <visualization_msgs/Marker.h>
+#include "mapping_igvc/LineObstacle.h"
+#include "mapping_igvc/ConeObstacle.h"
 
 // Motion
 #include <MotionController.h>
@@ -18,8 +20,7 @@
 
 // Utilities
 #include <sb_utils.h>
-#include "mapping_igvc/LineObstacle.h"
-#include "mapping_igvc/ConeObstacle.h"
+#include <RvizUtils.h>
 
 // Avoiders
 #include "ConeAvoider.h"
@@ -121,7 +122,7 @@ private:
     ros::Publisher twist_publisher;
 
     // Debug Publishers
-    /*TODO:*/
+    ros::Publisher destination_debug_publisher;
 
     // Controller
     MotionController hole_tracker_decision;

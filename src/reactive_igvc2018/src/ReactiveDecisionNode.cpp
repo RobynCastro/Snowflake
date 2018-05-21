@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace mapping_igvc;
+using namespace snowbots;
 
 ReactiveDecisionNode::ReactiveDecisionNode(int argc, char **argv, string node_name) {
 
@@ -46,7 +47,11 @@ void ReactiveDecisionNode::lineMessageCallBack(LineObstacle lineObstacle) {
 
 void ReactiveDecisionNode::updateTargetDestination(vector<ConeObstacle> new_cones, LineObstacle new_line, bool updateCones, bool updateLines) {
     geometry_msgs::Point destination;
-
+    destination.x = 0;
+    destination.y = 0;
+    destination.z = 0;
+    
+    
     // Update any obstacles
     if(updateCones)
         cones = new_cones;
@@ -55,16 +60,43 @@ void ReactiveDecisionNode::updateTargetDestination(vector<ConeObstacle> new_cone
 
     geometry_msgs::Twist desired_motion;
 
+    std::vector<std_msgs::ColorRGBA> colors;
+    std_msgs::ColorRGBA color;
+    color.a = 1.0f;
+
+    string frame_id = "base_link";
+    string ns = "debug";
+
     // Determine destination and accompanying twist message.
     if (cones.size() > 0) {
         destination = cone_avoider.getTargetDestination(cones);
         desired_motion = hole_tracker_decision.determineDesiredMotion(destination);
+
+        // Red Marker
+        color.r = 1.0f;
+        color.g = 0;
+        color.b = 0;
     } else if (new_line.header.stamp.isValid()) {
         destination = line_avoider.getTargetDestination(line);
         desired_motion = hole_tracker_decision.determineDesiredMotion(destination);
+
+        // Blue Marker
+        color.r = 0;
+        color.g = 0;
+        color.b = 1.0f;
     } else {
         desired_motion = recent_gps;
+
+        // Green Marker
+        color.r = 0;
+        color.g = 1.0f;
+        color.b = 0;
     }
+
+    colors.push_back(color);
+
+    visualization_msgs::Marker::_scale_type scale = RvizUtils::createrMarkerScale(0.1, 0.1, 0.1);
+    destination_debug_publisher.publish(RvizUtils::createMarker(destination, colors, scale, frame_id, ns));
 
     // Move towards desired destination
     publishTwist(desired_motion);
@@ -110,4 +142,7 @@ void ReactiveDecisionNode::initPublishers(ros::NodeHandle private_nh) {
     uint32_t queue_size = 1;
     string topic = private_nh.resolveName("cmd_vel");
     twist_publisher = private_nh.advertise<geometry_msgs::Twist>(topic, queue_size);
+
+    std::string hole_debug_topic = private_nh.resolveName("debug/destination");
+    destination_debug_publisher = private_nh.advertise<visualization_msgs::Marker>(hole_debug_topic, queue_size);
 }

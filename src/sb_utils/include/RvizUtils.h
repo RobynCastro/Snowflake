@@ -85,7 +85,7 @@ class RvizUtils {
      * @return an rviz marker array
      */
     static visualization_msgs::MarkerArray createMarkerArray(
-    std::vector<std::vector<geometry_msgs::Point>> points_arary,
+    std::vector<std::vector<geometry_msgs::Point> > points_arary,
     visualization_msgs::Marker::_color_type color,
     visualization_msgs::Marker::_scale_type scale,
     std::string frame_id,
