@@ -1,0 +1,33 @@
+<launch>
+<!--
+	This launch file is responsible for launching the entire reactive decision stack
+-->
+
+	<!-- Start the line extractor node -->
+	<include file="$(find sb_pointcloud_processing)/launch/line_extractor.launch"/>
+
+	<!-- Start the cone extractor node -->
+	<include file="$(find sb_laserscan_processing)/launch/cone_extractor.launch"/>
+
+	<!-- Start the gps_manager -->
+	<include file="$(find decision_igvc)/launch/waypoint_navigation.launch"/>
+
+	<!-- Start the reactive decision node -->
+	<node name="reactive_decision_node" type="reactive_decision_node" pkg="reactive_igvc2018" output="screen">
+		<!-- Robot Parameters -->
+			<rosparam param="robot_width"> 1.0 </rosparam>
+
+		<!-- Avoidance Parameters -->
+			<rosparam param="distance_away_from_robot"> 1.0 </rosparam>
+			<rosparam param="distance_away_from_line"> 1.0 </rosparam>
+
+		<!-- Motion Parameters -->
+			<rosparam param="angular_vel_cap"> 1.0 </rosparam>
+			<rosparam param="linear_vel_cap"> 1.0 </rosparam>
+			<rosparam param="angular_vel_multiplier"> 1.0 </rosparam>
+			<rosparam param="linear_vel_multiplier"> 1.0 </rosparam>
+			<rosparam param="theta_scaling_multiplier"> 1.0 </rosparam>
+			<rosparam param="max_distance_from_goal"> 1.0 </rosparam>
+	</node>
+
+</launch>
