@@ -40,23 +40,23 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(hole_tracker_node
-        src/hole_tracker_node.cpp
-        src/HoleTrackerNode.cpp
-        src/HoleTrackerDecision.cpp
+add_executable(reactive_decision_node
+        src/reactive_decision_node.cpp
+        src/ReactiveDecisionNode.cpp
+        src/MotionController.cpp
         src/LinearAlgebra.cpp
         src/LineAvoider.cpp
         src/ConeAvoider.cpp
         src/ConeLineAvoider.cpp
-        include/HoleTrackerNode.h
-        include/HoleTrackerDecision.h
+        include/ReactiveDecisionNode.h
+        include/MotionController.h
         include/LinearAlgebra.h
         include/LineAvoider.h
         include/ConeAvoider.h
         include/ConeLineAvoider.h)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(hole_tracker_node
+target_link_libraries(reactive_decision_node
         ${catkin_LIBRARIES}
         ${sb_utils_LIBRARIES})
 
