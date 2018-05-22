@@ -1,5 +1,5 @@
 <launch>
-    <node name="cone_extractor_node" pkg="sb_laserscan_processing" type="cone_extractor_node" output="screen">
+    <node name="cone_extractor_node" pkg="sb_laserscan_processing" type="cone_extractor_node">
         <!-- tolerance for distance between laserscan points belonging to different cones -->
         <param name="cone_dist_tol" value="0.018" type="double" />
 
