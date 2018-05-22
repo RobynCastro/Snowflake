@@ -79,7 +79,7 @@ void ReactiveDecisionNode::updateTargetDestination(vector<ConeObstacle> new_cone
         color.r = 1.0f;
         color.g = 0;
         color.b = 0;
-    } else if (new_line.header.stamp.isValid()) {
+    } else if (new_line.coefficients.size() > 0) {
         destination = line_avoider.getTargetDestination(line);
         desired_motion = hole_tracker_decision.determineDesiredMotion(destination);
 
