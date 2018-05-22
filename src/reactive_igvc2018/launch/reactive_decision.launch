@@ -9,7 +9,7 @@
 	<!-- Start the cone extractor node -->
 	<include file="$(find sb_laserscan_processing)/launch/cone_extractor.launch"/>
 
-	<!-- Start the gps_manager -->
+	<!-- Start waypoint navigation -->
 	<include file="$(find decision_igvc)/launch/waypoint_navigation.launch"/>
 
 	<!-- Start the reactive decision node -->

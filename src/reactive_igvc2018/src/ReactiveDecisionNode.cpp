@@ -33,6 +33,9 @@ ReactiveDecisionNode::ReactiveDecisionNode(int argc, char **argv, string node_na
 
 void ReactiveDecisionNode::gpsCallBack(const geometry_msgs::Twist::ConstPtr &gps_decision) {
     recent_gps = *gps_decision;
+    vector<ConeObstacle> cones;
+    LineObstacle line;
+    updateTargetDestination(cones, line, false, false);
 }
 
 void ReactiveDecisionNode::coneMessageCallBack(ConeObstacle coneObstacle) {
@@ -124,12 +127,12 @@ void ReactiveDecisionNode::initDecisionParams(ros::NodeHandle private_nh) {
 }
 
 void ReactiveDecisionNode::initSubscribers(ros::NodeHandle nh) {
-    string topic_to_subscribe_to = "/output_cone_obstacle";
+    string topic_to_subscribe_to = "/cone_extractor_node/output_cone_obstacle";
     uint32_t refresh_rate = 10;
     cone_message_subscriber = nh.subscribe(topic_to_subscribe_to, refresh_rate, &ReactiveDecisionNode::coneMessageCallBack,
                                          this);
 
-    string line_extractor_topic = "/output_line_obstacle";
+    string line_extractor_topic = "/line_extractor_node/output_line_obstacle";
     line_message_subscriber = nh.subscribe(line_extractor_topic, refresh_rate, &ReactiveDecisionNode::lineMessageCallBack,
                                             this);
 
