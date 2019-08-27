@@ -1,0 +1,74 @@
+.navbar.sl-navbar
+  background: blue
+  color: white
+  margin-bottom: 0
+
+  .navbar-brand
+    padding: 10px
+    font-family: $font-family-logo
+    font-weight: 600
+    font-size: 28px
+    color: white
+
+    .sl-logo, span
+      display: inline-block
+      vertical-align: middle
+    .sl-logo
+      padding-right: 5px
+      svg path
+        fill: white
+    span
+      margin-top: -4px
+
+  .navbar-text,
+  .navbar-nav > li > a
+    color: $gray-lighter
+
+  .header-text
+    margin-left: 125px
+  .navbar-nav > .dropdown,
+  .navbar-nav > li
+    & > a
+      font-weight: bold
+    &:hover,
+    &.open > a,
+    &.open > a:hover,
+    &.open > a:focus,
+    &.active > a
+      background: darken($brand-primary, 5%)
+      color: white
+
+  .navbar-collapse,
+  .navbar-form
+    border-color: darken($brand-primary, 5%)
+
+  .navbar-toggle
+    border: none
+    margin: 8px 8px 0 0
+    padding: 10px
+    &:hover,
+    &:focus
+      background: lighten($brand-primary, 10%)
+
+    .icon-bar
+      background-color: white
+
+  #sl-main-nav
+    background: #25d35d
+    @media (min-width: $screen-sm-min)
+      float: right
+      background: none
+
+    ul.nav-mobile
+      a
+        padding: 15px 15%
+        font-size: 20px
+        vertical-align: middle
+        span.mdi
+          margin-right: 30px
+          font-size: 32px
+          vertical-align: middle
+        span.nav-link-title
+          font-weight: normal
+          line-height: 32px
+          vertical-align: middle

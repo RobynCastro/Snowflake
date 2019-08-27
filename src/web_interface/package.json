@@ -1,0 +1,48 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Snowbots Rover",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run local:start",
+    "local:start": "react-scripts start"
+  },
+  "author": "Robyn Castro",
+  "license": "ISC",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^4.1.3",
+    "createjs": "^1.0.1",
+    "cross-env": "^5.2.0",
+    "eventemitter2": "^5.0.1",
+    "feathers": "^2.2.4",
+    "feathers-authentication-client": "^0.3.3",
+    "feathers-hooks": "^2.1.2",
+    "feathers-redux": "^3.0.0",
+    "feathers-rest": "^1.8.1",
+    "google-map-react": "^1.1.2",
+    "jquery": "^3.3.1",
+    "latest-createjs": "^1.0.24",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-ga": "^2.5.3",
+    "react-gamepad": "^1.0.3",
+    "react-nav2djs": "0.0.3",
+    "react-redux": "^5.1.1",
+    "react-router": "^3.2.0",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "^2.1.1",
+    "redux": "^3.7.2",
+    "redux-auth-wrapper": "^2.0.3",
+    "redux-multi": "^0.1.12",
+    "redux-promise-middleware": "^5.1.1",
+    "redux-thunk": "^2.3.0",
+    "roslib": "^0.20.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
